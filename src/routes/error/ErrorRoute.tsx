@@ -9,7 +9,7 @@ export function ErrorRoute({
   return (
     <div className={styles.default} {...restProps}>
       <h1>Oh no, this route doesn't exist!</h1>
-      <Link to="/" replace>
+      <Link to="/" replace aria-label="Go to home">
         You can go back to the home page by clicking here, though!
       </Link>
     </div>

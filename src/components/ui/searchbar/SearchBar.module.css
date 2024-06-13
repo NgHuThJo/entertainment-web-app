@@ -1,18 +1,20 @@
 .default {
   display: grid;
   align-items: center;
-  column-gap: 1rem;
+  column-gap: 0.5rem;
   grid-template-columns: auto 1fr;
   border-radius: var(--bd-rd-element);
+  overflow: visible;
 
   > [data-input] {
     grid-area: 1 / 2;
     width: 100%;
     border: none;
     outline: none;
-    caret-color: hsl(var(--c-element));
-    font-size: 1.25rem;
+    text-overflow: ellipsis;
     font-weight: var(--fw-heading);
+    font-size: var(--fs-root);
+    caret-color: hsl(var(--c-element));
     background-color: transparent;
     transition: outline-width var(--transition-duration);
   }

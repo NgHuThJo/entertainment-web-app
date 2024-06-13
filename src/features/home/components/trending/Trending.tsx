@@ -58,10 +58,15 @@ export function Trending() {
                 sizes={`(max-width: ${m}) 480px, 940px`}
                 alt={`${item.title} thumbnail`}
                 src={item.thumbnail.trending?.large}
+                loading="lazy"
                 data-background-image
               ></Image>
               <div className={styles.overlay}>
-                <button onClick={() => handleBookmark(item)} data-bookmark>
+                <button
+                  onClick={() => handleBookmark(item)}
+                  aria-label="bookmark"
+                  data-bookmark
+                >
                   <Image
                     className="bookmark"
                     src={
@@ -71,10 +76,15 @@ export function Trending() {
                     }
                   ></Image>
                 </button>
-                <Link to={`/${item.title}`} className={styles.play} data-play>
+                <Info item={item} categoryMap={categoryMap}></Info>
+                <Link
+                  to={`/${item.title}`}
+                  className={styles.play}
+                  aria-label="play video"
+                  data-play
+                >
                   <Image src={icon_play}></Image>
                 </Link>
-                <Info item={item} categoryMap={categoryMap}></Info>
               </div>
             </li>
           ))}

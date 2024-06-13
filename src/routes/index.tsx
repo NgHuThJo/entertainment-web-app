@@ -5,12 +5,12 @@ import { App } from "@/App";
 import { AppRoute } from "./app/AppRoute";
 import { ErrorRoute } from "./error/ErrorRoute";
 
-// Feature routes
-import { BookmarkRoute } from "@/features/bookmark/routes/BookmarkRoute";
-import { HomeRoute } from "@/features/home/routes/HomeRoute";
-import { Item } from "@/features/shared/components/item/Item";
-import { MovieRoute } from "@/features/movie/routes/MovieRoute";
-import { TvRoute } from "@/features/tv/routes/TvRoute";
+// // Feature routes
+// import { BookmarkRoute } from "@/features/bookmark/routes/BookmarkRoute";
+// import { HomeRoute } from "@/features/home/routes/HomeRoute";
+// import { Item } from "@/features/shared/components/item/Item";
+// import { MovieRoute } from "@/features/movie/routes/MovieRoute";
+// import { TvRoute } from "@/features/tv/routes/TvRoute";
 
 export const routesConfig = [
   {
@@ -23,23 +23,46 @@ export const routesConfig = [
         children: [
           {
             index: true,
-            element: <HomeRoute />,
+            async lazy() {
+              let { HomeRoute } = await import(
+                "@/features/home/routes/HomeRoute"
+              );
+              return { Component: HomeRoute };
+            },
           },
           {
             path: "movies",
-            element: <MovieRoute />,
+            async lazy() {
+              let { MovieRoute } = await import(
+                "@/features/movie/routes/MovieRoute"
+              );
+              return { Component: MovieRoute };
+            },
           },
           {
             path: "tv",
-            element: <TvRoute />,
+            async lazy() {
+              let { TvRoute } = await import("@/features/tv/routes/TvRoute");
+              return { Component: TvRoute };
+            },
           },
           {
             path: "bookmark",
-            element: <BookmarkRoute />,
+            async lazy() {
+              let { BookmarkRoute } = await import(
+                "@/features/bookmark/routes/BookmarkRoute"
+              );
+              return { Component: BookmarkRoute };
+            },
           },
           {
             path: ":item",
-            element: <Item />,
+            async lazy() {
+              let { Item } = await import(
+                "@/features/shared/components/item/Item"
+              );
+              return { Component: Item };
+            },
           },
         ],
       },

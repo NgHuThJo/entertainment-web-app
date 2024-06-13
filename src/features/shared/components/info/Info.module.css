@@ -1,4 +1,6 @@
 .info {
+  font-size: var(--fs-label);
+
   > [data-info-row] {
     display: flex;
     align-items: center;

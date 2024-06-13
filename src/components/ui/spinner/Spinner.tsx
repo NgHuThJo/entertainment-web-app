@@ -7,10 +7,8 @@ import styles from "./Spinner.module.css";
 
 type SpinnerProps = Overwrite<React.ComponentPropsWithoutRef<"div">, ClassName>;
 
-function Spinner({ className = "default", ...restProps }: SpinnerProps) {
+export function Spinner({ className = "default", ...restProps }: SpinnerProps) {
   return (
     <div className={resolveClassName(className, styles)} {...restProps}></div>
   );
 }
-
-export default Spinner;

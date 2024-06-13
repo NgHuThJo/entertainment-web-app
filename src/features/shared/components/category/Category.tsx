@@ -51,7 +51,11 @@ export function Category({ data, categoryMap }: DataContext) {
               data-background-image
             ></Image>
             <div className={styles.overlay}>
-              <button onClick={() => handleBookmark(item)} data-bookmark>
+              <button
+                onClick={() => handleBookmark(item)}
+                aria-label="bookmark"
+                data-bookmark
+              >
                 <Image
                   className="bookmark"
                   src={
@@ -59,7 +63,12 @@ export function Category({ data, categoryMap }: DataContext) {
                   }
                 ></Image>
               </button>
-              <Link to={`/${item.title}`} className={styles.play} data-play>
+              <Link
+                to={`/${item.title}`}
+                className={styles.play}
+                aria-label="play video"
+                data-play
+              >
                 <Image src={icon_play}></Image>
               </Link>
             </div>

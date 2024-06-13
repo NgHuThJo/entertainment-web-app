@@ -29,8 +29,8 @@
   --fw-root: 400;
   --fw-heading: 700;
 
-  --fs-root: 0.9375rem;
-  --fs-label: 0.8125rem;
+  --fs-root: clamp(0.9375rem, 0.725rem + 1.0625vw, 2rem);
+  --fs-label: clamp(0.8125rem, 0.675rem + 0.6875vw, 1.5rem);
   --fs-h1: 2rem;
   --fs-h2: 1.5rem;
   --fs-h3: 1.5rem;

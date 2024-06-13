@@ -4,6 +4,7 @@
   grid-column: breakout-right;
   grid-auto-flow: column;
   grid-auto-columns: clamp(15rem, 4.2857rem + 53.5714svw, 30rem);
+  min-height: 15rem;
   padding-inline-end: var(--macro-grid-p-inline);
   cursor: grab;
   overflow-x: auto;
@@ -12,6 +13,7 @@
   scroll-padding-inline-end: var(--macro-grid-p-inline);
 
   @media (min-width: 768px) {
+    grid-template-rows: none;
     grid-auto-columns: clamp(30rem, 3.3333rem + 55.5556svw, 45rem);
     scroll-snap-type: none;
   }

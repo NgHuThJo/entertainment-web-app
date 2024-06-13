@@ -1,5 +1,5 @@
 // Third party
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // Context
 import { useDataContext } from "@/providers/context/DataContext";
 // Components
@@ -7,32 +7,16 @@ import { Category } from "@/features/shared/components/category/Category";
 import { SearchBar } from "@/components/ui/searchbar";
 // Utility
 import { useDebounce } from "@/hooks/useDebounce";
-// Types
-import { Data } from "@/providers/context/DataContext";
 // Styles
 import styles from "./BookmarkRoute.module.css";
 
 export function BookmarkRoute() {
   const { categoryMap, data } = useDataContext();
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filteredData, setFilteredData] = useState<Data[]>(() =>
-    data.filter((item) => item.isBookmarked)
-  );
-
-  useEffect(() => {
-    setFilteredData(
-      data.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    );
-  }, [data]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
   const debouncedCallback = useDebounce(() => {
-    setFilteredData(
-      data.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    );
+    setDebouncedSearchQuery(searchQuery);
   });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +24,12 @@ export function BookmarkRoute() {
 
     debouncedCallback();
   };
+
+  const filteredData = data
+    .filter((item) => item.isBookmarked)
+    .filter((item) =>
+      item.title.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
+    );
 
   return (
     <>
