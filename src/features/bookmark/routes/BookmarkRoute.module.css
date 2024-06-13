@@ -1,0 +1,4 @@
+.h1 {
+  composes: h1 from global;
+  padding-block: 3rem;
+}

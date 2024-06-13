@@ -1,0 +1,32 @@
+.default {
+  display: grid;
+  align-items: center;
+  column-gap: 1rem;
+  grid-template-columns: auto 1fr;
+  border-radius: var(--bd-rd-element);
+
+  > [data-input] {
+    grid-area: 1 / 2;
+    width: 100%;
+    border: none;
+    outline: none;
+    caret-color: hsl(var(--c-element));
+    font-size: 1.25rem;
+    font-weight: var(--fw-heading);
+    background-color: transparent;
+    transition: outline-width var(--transition-duration);
+  }
+
+  > [data-underline] {
+    align-self: end;
+    grid-area: 1 / 2;
+    width: 0;
+    height: 2px;
+    background-color: hsl(var(--c-underline));
+    transition: width var(--transition-duration);
+  }
+}
+
+.default:has(input:focus) > [data-underline] {
+  width: 100%;
+}

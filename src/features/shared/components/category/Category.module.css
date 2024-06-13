@@ -1,0 +1,54 @@
+.recommendation {
+  composes: auto-grid-fill from global;
+
+  gap: var(--macro-grid-gap);
+
+  > li > div:first-child {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  img[data-background-image] {
+    transition: opacity var(--transition-duration);
+  }
+
+  [data-list-item]:has(.play:hover) img[data-background-image] {
+    opacity: 0.5;
+  }
+}
+
+.play {
+  transition: transform var(--transition-duration);
+}
+
+.play:hover,
+.play:focus {
+  transform: scale(1.5);
+}
+
+.overlay {
+  composes: grid-stack from global;
+  isolation: isolate;
+  padding: 1.5rem;
+
+  > [data-bookmark] {
+    --opacity: 0.5;
+
+    justify-self: end;
+    align-self: start;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: hsl(var(--bgc-icon) / var(--opacity));
+    transition: background-color var(--transition-duration);
+  }
+
+  > [data-play] {
+    justify-self: center;
+    align-self: center;
+  }
+
+  button:hover,
+  button:focus {
+    --opacity: 1;
+  }
+}

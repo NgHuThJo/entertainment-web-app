@@ -1,0 +1,9 @@
+.h1 {
+  composes: h1 from global;
+  padding-block: var(--padding-main);
+}
+
+.h2 {
+  composes: h2 from global;
+  padding-block: var(--padding-main);
+}

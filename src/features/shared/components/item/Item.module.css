@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  gap: 2rem;
+  grid-column: content;
+}
+
+.video {
+  width: min(var(--max-w-content), 100%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 10rem);
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  font-size: 1.5rem;
+
+  > p:nth-child(2n) {
+    font-size: 1.25rem;
+  }
+
+  > p:nth-child(2n + 1) {
+    font-weight: var(--fw-heading);
+  }
+}
