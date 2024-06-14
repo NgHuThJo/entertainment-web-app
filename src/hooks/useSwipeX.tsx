@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 import { animate, nthPower, makeEaseOut } from "@/utils/animate";
 
 type PointerCoordsX = {
-  startX: number;
-  scrollLeft: number;
+  lastX: number;
+  lastScrollLeft: number;
 };
 
 export function useSwipeX() {
@@ -16,8 +16,8 @@ export function useSwipeX() {
   const lastDelta = useRef(0);
   const distanceMovedBeforePointerRelease = useRef(0);
   const pointerCoords = useRef<PointerCoordsX>({
-    startX: 0,
-    scrollLeft: 0,
+    lastX: 0,
+    lastScrollLeft: 0,
   });
   const deltaMultiplier = 1.5;
   const animationThreshold = 50;
@@ -39,13 +39,15 @@ export function useSwipeX() {
         }
 
         const currentX = event.pageX - container.offsetLeft;
-        lastDelta.current = currentX - pointerCoords.current.startX;
+        lastDelta.current = currentX - pointerCoords.current.lastX;
         container.scrollLeft =
-          pointerCoords.current.scrollLeft -
+          pointerCoords.current.lastScrollLeft -
           lastDelta.current * deltaMultiplier;
         distanceMovedBeforePointerRelease.current += Math.abs(
           lastDelta.current
         );
+        pointerCoords.current.lastX = currentX;
+        pointerCoords.current.lastScrollLeft = container.scrollLeft;
 
         isThrottled.current = false;
       });
@@ -66,9 +68,12 @@ export function useSwipeX() {
 
       event.preventDefault();
 
-      const startX = event.pageX - container.offsetLeft;
-      const scrollLeft = container.scrollLeft;
-      pointerCoords.current = { startX, scrollLeft };
+      const currentX = event.pageX - container.offsetLeft;
+      const currentScrollLeft = container.scrollLeft;
+      pointerCoords.current = {
+        lastX: currentX,
+        lastScrollLeft: currentScrollLeft,
+      };
 
       isDragging.current = true;
       container.setAttribute("data-pointer-down", "");
